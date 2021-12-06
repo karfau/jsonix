@@ -388,7 +388,7 @@ this.date=new Date(d.getTime()+e)
 },CLASS_NAME:"Jsonix.XML.Calendar"});
 Jsonix.XML.Calendar.MIN_TIMEZONE=-14*60;
 Jsonix.XML.Calendar.MAX_TIMEZONE=14*60;
-Jsonix.XML.Calendar.DAYS_IN_MONTH=[31,29,31,30,31,30,31,31,30,31,30,31];
+Jsonix.XML.Calendar.DAYS_IN_MONTH=[[31,28,31,30,31,30,31,31,30,31,30,31],[31,29,31,30,31,30,31,31,30,31,30,31]];
 Jsonix.XML.Calendar.fromObject=function(b){Jsonix.Util.Ensure.ensureObject(b);
 if(Jsonix.Util.Type.isString(b.CLASS_NAME)&&b.CLASS_NAME==="Jsonix.XML.Calendar"){return b
 }return new Jsonix.XML.Calendar(b)
@@ -399,12 +399,14 @@ Jsonix.XML.Calendar.validateMonth=function(b){if(b<1||b>12){throw new Error("Inv
 }};
 Jsonix.XML.Calendar.validateDay=function(b){if(b<1||b>31){throw new Error("Invalid day ["+b+"]. Day must be in range [1, 31].")
 }};
-Jsonix.XML.Calendar.validateMonthDay=function(f,d){Jsonix.XML.Calendar.validateMonth(f);
-var e=Jsonix.XML.Calendar.DAYS_IN_MONTH[f-1];
-if(d<1||d>Jsonix.XML.Calendar.DAYS_IN_MONTH[f-1]){throw new Error("Invalid day ["+d+"]. Day must be in range [1, "+e+"].")
+Jsonix.XML.Calendar.validateMonthDay=function(f,d,g){Jsonix.XML.Calendar.validateMonth(f);
+var h=(g===false)?0:1;
+var e=Jsonix.XML.Calendar.DAYS_IN_MONTH[h][f-1];
+if(d<1||d>e){throw new Error("Invalid day ["+d+"]. Day must be in range [1, "+e+"].")
 }};
 Jsonix.XML.Calendar.validateYearMonthDay=function(d,f,e){Jsonix.XML.Calendar.validateYear(d);
-Jsonix.XML.Calendar.validateMonthDay(f,e)
+var g=((d%4==0)&&(d%100!=0))||(d%400==0);
+Jsonix.XML.Calendar.validateMonthDay(f,e,g)
 };
 Jsonix.XML.Calendar.validateHour=function(b){if(b<0||b>23){throw new Error("Invalid hour ["+b+"]. Hour must be in range [0, 23].")
 }};
