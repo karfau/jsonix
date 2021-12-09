@@ -26,7 +26,7 @@ public class CalendarTest {
 	}
 
 	@Test
-	public void factionalSeconds() {
+	public void fractionalSeconds() {
 
 		Assert.assertEquals(new BigDecimal("0.1"), DATATYPE_FACTORY
 				.newXMLGregorianCalendar("1970-01-01T00:00:00.1")

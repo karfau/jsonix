@@ -5,6 +5,16 @@ module.exports = {
 	"ValidateMonthDay" : function(test) {
 		var gMonthDay = Jsonix.Schema.XSD.Calendar.INSTANCE;
 
+		// added an optional parameter for leap year. if not passed
+		// in, it assumes that it is a leap year (prevents breakage)
+		test.throws(function() {
+			Jsonix.XML.Calendar.validateMonthDay(02, 29, false);
+		});
+
+		test.doesNotThrow(function() {
+			Jsonix.XML.Calendar.validateMonthDay(02, 29, true);
+		});
+
 		test.doesNotThrow(function() {
 			Jsonix.XML.Calendar.validateMonthDay(02, 29);
 		});
