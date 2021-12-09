@@ -49,7 +49,7 @@ module.exports = {
 	"ValidateJson": function (test) {
 		// Load JSON Schemas
 		var XMLSchemaJsonSchema = JSON.parse(fs.readFileSync('./node_modules/jsonix/jsonschemas/w3c/2001/XMLSchema.jsonschema').toString());
-		var JsonixJsonSchema = JSON.parse(fs.readFileSync('./node_modules/jsonix/jsonschemas/Jsonix/Jsonix.jsonschema').toString());
+		var JsonixJsonSchema = JSON.parse(fs.readFileSync('./node_modules/jsonix/jsonschemas/jsonix/Jsonix.jsonschema').toString());
 		var POJsonSchema = JSON.parse(fs.readFileSync('./mappings/PO.jsonschema').toString());
 
 		var ajv = new Ajv();

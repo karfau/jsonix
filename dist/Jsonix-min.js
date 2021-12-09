@@ -6,7 +6,7 @@ Jsonix.Util={};
 Jsonix.Util.extend=function(f,g){f=f||{};
 if(g){for(var h in g){var e=g[h];
 if(e!==undefined){f[h]=e
-}}sourceIsEvt=typeof window!=="undefined"&&window!==null&&typeof window.Event==="function"&&g instanceof window.Event;
+}}var sourceIsEvt=typeof window!=="undefined"&&window!==null&&typeof window.Event==="function"&&g instanceof window.Event;
 if(!sourceIsEvt&&g.hasOwnProperty&&g.hasOwnProperty("toString")){f.toString=g.toString
 }}return f
 };
@@ -2485,11 +2485,10 @@ if(Jsonix.Util.Type.isString(f)){return f
 if (typeof require === 'function') {
 	// ... but the define function does not exists
 	if (typeof define !== 'function') {
-		// Load the define function via amdefine
-		var define = require('amdefine')(module);
-		// If we're not in browser
-		if (typeof window === 'undefined')
-		{
+		// ... and if we are not in a browser ...
+		if (typeof window === 'undefined' && !process.browser) {
+			// Load the define function via amdefine
+			var define = require('amdefine')(module);
 			// Require xmldom, xmlhttprequest and fs
 			define(["xmldom", "xmlhttprequest", "fs"], _jsonix_factory);
 		}
@@ -2498,7 +2497,11 @@ if (typeof require === 'function') {
 			// We're probably in browser, maybe browserify
 			// Do not require xmldom, xmlhttprequest as they'r provided by the browser
 			// Do not require fs since file system is not available anyway
-			define([], _jsonix_factory);
+			if (typeof exports === "object") {
+				module.exports = _jsonix_factory();
+			} else {
+				var Jsonix = _jsonix_factory().Jsonix;
+			}
 		}
 	}
 	else {
@@ -2507,7 +2510,6 @@ if (typeof require === 'function') {
 		define([], _jsonix_factory);
 	}
 }
-// If the require function does not exists, we're not in Node.js and therefore in browser environment
 else
 {
 	// Just call the factory and set Jsonix as global.
