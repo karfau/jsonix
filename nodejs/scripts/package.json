@@ -33,10 +33,10 @@
 	"scripts" : {
 		"test" : "nodeunit tests/tests.js"
 	},
-	"dependencies" : {
-		"amdefine" : "0.x.x",
-		"xmldom" : ">=0.1.21",
-		"xmlhttprequest" : "1.x.x"
+	"dependencies": {
+		"@xmldom/xmldom": ">=0.8.0",
+		"amdefine": "0.x.x",
+		"xmlhttprequest": "1.x.x"
 	},
 	"devDependencies" : {
 		"nodeunit" : "0.x.x",

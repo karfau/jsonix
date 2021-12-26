@@ -2490,7 +2490,7 @@ if (typeof require === 'function') {
 			// Load the define function via amdefine
 			var define = require('amdefine')(module);
 			// Require xmldom, xmlhttprequest and fs
-			define(["xmldom", "xmlhttprequest", "fs"], _jsonix_factory);
+			define(["@xmldom/xmldom", "xmlhttprequest", "fs"], _jsonix_factory);
 		}
 		else
 		{
